@@ -1,0 +1,6 @@
+@Claro_TechTest_HostAddress = http://localhost:5276
+
+GET {{Claro_TechTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
