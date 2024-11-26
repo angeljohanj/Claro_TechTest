@@ -2,33 +2,41 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="card">
-    <h5 class="card-header">Books</h5>    
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Books</h5>
+        <a class="btn btn-success btn-sm" asp-action="Create" asp-controller="Home">Create New</a>
+    </div>
     <div class="card-body">
-        <a class="btn btn-success" asp-action="Create" asp-controller="Home">Create new</a>
-        <table class="table">
-            <thead>
+        <form method="GET" asp-action="Index" asp-controller="Home" class="d-flex mb-3">
+            <input type="search" name="id" class="form-control me-2" placeholder="Search by ID" />
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <table class="table table-hover table-bordered">
+            <thead class="table-light">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
                     <th scope="col">Excerpt</th>
-                    <th scope="col">PublishDate</th>
+                    <th scope="col">Publish Date</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Title</td>
-                        <td>@item.Description</td>
-                        <td>@item.Excerpt</td>
+                        <td class="text-truncate" style="max-width: 120px;">@item.Description</td>
+                        <td class="text-truncate" style="max-width: 120px;">@item.Excerpt</td>
                         <td>@item.PublishDate</td>
                         <td>
-                            <a class="btn btn-warning" asp-route-id="@item.Id" asp-controller="Home" asp-action="Update">Edit</a>
-                            <a class="btn btn-danger" asp-route-id="@item.Id" asp-controller="Home" asp-action="Delete">Delete</a>
+                            <a class="btn btn-warning btn-sm" asp-route-id="@item.Id" asp-controller="Home" asp-action="Update">Edit</a>
+                            <a class="btn btn-info btn-sm text-white" asp-route-id="@item.Id" asp-controller="Home" asp-action="ViewBook">View</a>
+                            <a class="btn btn-danger btn-sm" asp-route-id="@item.Id" asp-controller="Home" asp-action="Delete">Delete</a>
                         </td>
                     </tr>
                 }
@@ -37,13 +45,3 @@
     </div>
 </div>
 
-
-@* Modals *@
-<!-- Vertically centered scrollable modal -->
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="descriptionModal">
-    <div class="modal-body">
-        <div class="modal-content">            
-            
-        </div>
-    </div>
-</div>

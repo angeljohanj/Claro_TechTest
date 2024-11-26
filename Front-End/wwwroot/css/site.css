@@ -25,3 +25,10 @@ textarea {
     width: 570px !important;
     height: 400px !important;
 }
+
+.three-dot-cont {
+    text-overflow: ellipsis;
+    max-width: 50px;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}

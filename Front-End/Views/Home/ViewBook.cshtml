@@ -1,0 +1,58 @@
+﻿@model BookModel;
+@{
+    ViewData["Title"] = "ViewBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">View a Book</h4>
+                </div>
+                <div class="card-body">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" asp-for="Title" disabled />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <p class="text-truncate description" style="max-height: 100px; overflow: hidden;">
+                            <textarea class="form-control" asp-for="Description" disabled style="resize: none;"></textarea>
+                        </p>
+                        <a href="#" class="toggle-link text-primary">Show more</a>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Page Count</label>
+                        <input type="number" class="form-control" asp-for="PageCount" disabled />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Excerpt</label>
+                        <p class="text-truncate excerpt" style="max-height: 100px; overflow: hidden;">
+                            <textarea class="form-control" asp-for="Excerpt" disabled style="resize: none;"></textarea>
+                        </p>
+                        <a href="#" class="toggle-link text-primary">Show more</a>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Publish Date</label>
+                        <input type="date" class="form-control" asp-for="PublishDate" disabled />
+                    </div>
+
+                    <div class="text-center">
+                        <a class="btn btn-dark" asp-action="Index" asp-controller="Home">Return</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

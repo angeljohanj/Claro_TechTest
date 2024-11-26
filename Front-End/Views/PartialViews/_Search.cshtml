@@ -1,0 +1,9 @@
+﻿@model BookModel;
+@{
+    ViewData["Title"] = "_Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="Index" asp-controller="Home">
+    <input type="search" asp-for="Id" />
+</form>

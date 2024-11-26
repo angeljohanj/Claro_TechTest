@@ -15,11 +15,17 @@ namespace Front_End.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var books = await _bookServices.Books();
+            var books = await _bookServices.Books(id);
             if (ModelState.IsValid) return View(books);
             return RedirectToAction("Error");
+        }
+        public async Task<IActionResult> ViewBook(int id)
+        {
+            var book = await _bookServices.FetchBook(id);
+            if (ModelState.IsValid) return View(book);
+            else return RedirectToAction("Error");
         }
 
         [HttpPost]

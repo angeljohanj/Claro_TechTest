@@ -14,7 +14,7 @@ namespace Front_End.Services
             _api = new DataConnection();
         }
 
-        public async Task<List<BookModel>> Books()
+        public async Task<List<BookModel>> Books(int? id)
         {
             var books = new List<BookModel>();
             try
@@ -26,6 +26,10 @@ namespace Front_End.Services
                 {
                     var response = await result.Content.ReadAsStringAsync();
                     books = JsonConvert.DeserializeObject<List<BookModel>>(response);
+                    if (id != null)
+                    {
+                        books = books.Where(x => x.Id == id).ToList();
+                    }
                 }
             }
             catch (Exception ex)
@@ -61,7 +65,7 @@ namespace Front_End.Services
             return ans;
         }
 
-        public async Task<BookModel> FetchBook(int id)
+        public async Task<BookModel> FetchBook(int? id)
         {
             var book = new BookModel();
             try
@@ -131,6 +135,5 @@ namespace Front_End.Services
 
             return ans;
         }
-
     }
 }
