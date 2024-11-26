@@ -1,8 +1,48 @@
-﻿@{
+﻿@model List<BookModel>;
+@{
     ViewData["Title"] = "Home Page";
 }
+<div class="card">
+    <h5 class="card-header">Books</h5>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Excerpt</th>
+                    <th scope="col">PublishDate</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.Excerpt</td>
+                        <td>@item.PublishDate</td>
+                        <td>
+                            <a class="btn btn-warning">Edit</a>
+                            <a class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@* Modals *@
+<!-- Vertically centered scrollable modal -->
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="descriptionModal">
+    <div class="modal-body">
+        <div class="modal-content">            
+            
+        </div>
+    </div>
 </div>
