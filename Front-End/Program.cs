@@ -1,9 +1,8 @@
-using Front_End.Dependencies;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddInjections();
 builder.Services.AddControllersWithViews();
 
 

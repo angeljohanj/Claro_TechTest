@@ -1,4 +1,3 @@
-using Front_End.Interfaces;
 using Front_End.Models;
 using Front_End.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +7,12 @@ namespace Front_End.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BookServices _bookServices;
         private readonly ILogger<HomeController> _logger;
-        private readonly IBookServices _bookServices;
-        public HomeController(ILogger<HomeController> logger, BookServices bookServices)
+        public HomeController(ILogger<HomeController> logger)
         {
+            _bookServices = new BookServices();
             _logger = logger;
-            _bookServices = bookServices;
         }
 
         public async Task<IActionResult> Index()
