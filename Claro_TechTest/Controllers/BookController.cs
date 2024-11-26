@@ -1,4 +1,5 @@
 ﻿using Claro_TechTest.Interfaces;
+using Claro_TechTest.Models;
 using Claro_TechTest.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +31,40 @@ namespace Claro_TechTest.Controllers
                 Console.WriteLine(ex.Message);
             }
             return new JsonResult(null);
+        }
+        [HttpGet("/api/Books/{id}")]
+        public async Task<JsonResult> Get([FromRoute] int id)
+        {
+            try
+            {
+                var book = await _bookService.GetBookById(id);
+
+                if (ModelState.IsValid)
+                {
+                    return new JsonResult(book);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new JsonResult(null);
+        }
+        [HttpPost("/api/Books/")]
+        public async Task<JsonResult> Create(BookModel book)
+        {
+            bool ans = false;
+            try
+            {
+                ans = await _bookService.CreateANewBook(book);
+                if (ans) new JsonResult(ans);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ans = false;
+            }
+            return new JsonResult(ans);
         }
     }
 }

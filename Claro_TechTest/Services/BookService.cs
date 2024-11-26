@@ -2,6 +2,7 @@
 using Claro_TechTest.Interfaces;
 using Claro_TechTest.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Claro_TechTest.Services
 {
@@ -34,6 +35,54 @@ namespace Claro_TechTest.Services
             }
 
             return books;
+        }
+
+        public async Task<BookModel> GetBookById(int id)
+        {
+            var book = new BookModel();
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, $"{_api.MainUrl}/api/v1/Books/{id}");
+                var result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    var response = await result.Content.ReadAsStringAsync();
+                    book = JsonConvert.DeserializeObject<BookModel>(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                book = null;
+            }
+
+            return book;
+        }
+
+        public async Task<bool> CreateANewBook(BookModel newBook)
+        {
+            bool ans = false;
+            try
+            {
+                HttpClient client = new HttpClient();
+                var data = JsonConvert.SerializeObject(newBook);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{_api.MainUrl}/api/v1/Books");
+                request.Content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    var response = await result.Content.ReadAsStringAsync();
+                    ans = response != null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                ans = false;
+            }
+
+            return ans;
         }
     }
 }
