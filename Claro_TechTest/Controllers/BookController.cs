@@ -12,9 +12,9 @@ namespace Claro_TechTest.Controllers
     public class BookController : ControllerBase
     {
         private readonly IBookService _bookService;
-        public BookController()
+        public BookController(BookService bookService)
         {
-            _bookService = new BookService();
+            _bookService = bookService;
         }
         [HttpGet("/api/Books")]
         public async Task<JsonResult> List()
