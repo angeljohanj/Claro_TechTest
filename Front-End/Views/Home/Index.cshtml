@@ -3,8 +3,9 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="card">
-    <h5 class="card-header">Books</h5>
+    <h5 class="card-header">Books</h5>    
     <div class="card-body">
+        <a class="btn btn-success" asp-action="Create" asp-controller="Home">Create new</a>
         <table class="table">
             <thead>
                 <tr>
@@ -26,8 +27,8 @@
                         <td>@item.Excerpt</td>
                         <td>@item.PublishDate</td>
                         <td>
-                            <a class="btn btn-warning">Edit</a>
-                            <a class="btn btn-danger">Delete</a>
+                            <a class="btn btn-warning" asp-route-id="@item.Id" asp-controller="Home" asp-action="Update">Edit</a>
+                            <a class="btn btn-danger" asp-route-id="@item.Id" asp-controller="Home" asp-action="Delete">Delete</a>
                         </td>
                     </tr>
                 }

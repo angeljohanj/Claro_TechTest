@@ -117,7 +117,7 @@ namespace Claro_TechTest.Services
             try
             {
                 HttpClient client = new HttpClient();
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, $"{_api.MainUrl}/api/v1/Books/{id}");
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, $"{_api.MainUrl}/api/v1/Books/{id}");
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
                 {

@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+textarea {
+    width: 570px !important;
+    height: 400px !important;
+}

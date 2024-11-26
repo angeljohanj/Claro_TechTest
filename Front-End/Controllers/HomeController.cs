@@ -22,6 +22,50 @@ namespace Front_End.Controllers
             return RedirectToAction("Error");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(BookModel book)
+        {
+            var ans = await _bookServices.NewBook(book);
+            if (ModelState.IsValid) return RedirectToAction("Index");
+            else return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            var book = await _bookServices.FetchBook(id);
+            if (ModelState.IsValid) return View(book);
+            else return RedirectToAction("Error");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(BookModel changes)
+        {
+            var ans = await _bookServices.EditBook(changes);
+            var result = ans == true;
+            if (result) return RedirectToAction("Index");
+            else return View();
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var book = await _bookServices.FetchBook(id);
+            if (ModelState.IsValid) return View(book);
+            else return RedirectToAction("Error");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(BookModel book)
+        {
+            var ans = await _bookServices.DeleteABookById(book.Id);
+            var result = ans == true;
+            if (result) return RedirectToAction("Index");
+            else return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

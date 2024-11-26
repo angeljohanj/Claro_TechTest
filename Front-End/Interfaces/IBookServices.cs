@@ -5,5 +5,10 @@ namespace Front_End.Interfaces
     public interface IBookServices
     {
         public Task<List<BookModel>> Books();
+        public Task<bool> NewBook(BookModel book);
+        public Task<BookModel> FetchBook(int id);
+        public Task<bool> EditBook(BookModel changes);
+        public Task<bool> DeleteABookById(int id);
+
     }
 }
