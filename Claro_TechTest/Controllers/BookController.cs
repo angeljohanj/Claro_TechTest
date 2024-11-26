@@ -66,5 +66,35 @@ namespace Claro_TechTest.Controllers
             }
             return new JsonResult(ans);
         }
+        [HttpPut("/api/Books/{id}")]
+        public async Task<JsonResult> Update(BookModel book, [FromRoute] int id)
+        {
+            var ans = false;
+            try
+            {
+                ans = await _bookService.EditABook(book, id);
+                if (ans) new JsonResult(ans);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new JsonResult(ans);
+        }
+        [HttpDelete("/api/Books/{id}")]
+        public async Task<JsonResult> Delete([FromRoute] int id)
+        {
+            var ans = false;
+            try
+            {
+                ans = await _bookService.DeleteABookById(id);
+                if (ans) new JsonResult(ans);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return new JsonResult(ans);
+        }
     }
 }

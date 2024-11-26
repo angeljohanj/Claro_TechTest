@@ -7,5 +7,8 @@ namespace Claro_TechTest.Interfaces
         public Task<List<BookModel>> ListAllBooks();
         public Task<BookModel> GetBookById(int id);
         public Task<bool> CreateANewBook(BookModel newBook);
+        public Task<bool> EditABook(BookModel book, int id);
+        public Task<bool> DeleteABookById(int id);
+
     }
 }

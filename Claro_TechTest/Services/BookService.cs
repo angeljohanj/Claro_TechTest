@@ -84,5 +84,54 @@ namespace Claro_TechTest.Services
 
             return ans;
         }
+
+        public async Task<bool> EditABook(BookModel book, int id)
+        {
+            bool ans = false;
+            try
+            {
+                HttpClient client = new HttpClient();
+                var data = JsonConvert.SerializeObject(book);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, $"{_api.MainUrl}/api/v1/Books/{id}");
+                request.Content = new StringContent(data, Encoding.UTF8, "application/json");
+                var result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    var response = await result.Content.ReadAsStringAsync();
+                    ans = response != null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                ans = false;
+            }
+
+            return ans;
+        }
+
+        public async Task<bool> DeleteABookById(int id)
+        {
+            bool ans = false;
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, $"{_api.MainUrl}/api/v1/Books/{id}");
+                var result = await client.SendAsync(request);
+                if (result.IsSuccessStatusCode)
+                {
+                    var response = await result.Content.ReadAsStringAsync();
+                    ans = response != null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync(ex.Message);
+                ans = false;
+            }
+
+            return ans;
+        }
     }
 }
+
