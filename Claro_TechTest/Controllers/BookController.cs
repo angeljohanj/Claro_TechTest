@@ -1,6 +1,8 @@
-﻿using Claro_TechTest.Interfaces;
+﻿using Claro_TechTest.DTOs.Requests;
+using Claro_TechTest.Interfaces;
 using Claro_TechTest.Models;
 using Claro_TechTest.Services;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Claro_TechTest.Controllers
@@ -56,7 +58,8 @@ namespace Claro_TechTest.Controllers
             bool ans = false;
             try
             {
-                ans = await _bookService.CreateANewBook(book);
+                CreateANewBookDTO bookDTO = book.Adapt<CreateANewBookDTO>();
+                ans = await _bookService.CreateANewBook(bookDTO);
                 if (ans) new JsonResult(ans);
             }
             catch (Exception ex)
@@ -72,7 +75,9 @@ namespace Claro_TechTest.Controllers
             var ans = false;
             try
             {
-                ans = await _bookService.EditABook(book, id);
+                var bookDTO = book.Adapt<UpdateABookDTO>();
+                bookDTO.Id = id;
+                ans = await _bookService.EditABook(bookDTO);
                 if (ans) new JsonResult(ans);
             }
             catch (Exception ex)

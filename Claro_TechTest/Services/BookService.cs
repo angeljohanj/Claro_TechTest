@@ -1,4 +1,5 @@
 ﻿using Claro_TechTest.Data;
+using Claro_TechTest.DTOs.Requests;
 using Claro_TechTest.Interfaces;
 using Claro_TechTest.Models;
 using Newtonsoft.Json;
@@ -60,7 +61,7 @@ namespace Claro_TechTest.Services
             return book;
         }
 
-        public async Task<bool> CreateANewBook(BookModel newBook)
+        public async Task<bool> CreateANewBook(CreateANewBookDTO newBook)
         {
             bool ans = false;
             try
@@ -85,14 +86,14 @@ namespace Claro_TechTest.Services
             return ans;
         }
 
-        public async Task<bool> EditABook(BookModel book, int id)
+        public async Task<bool> EditABook(UpdateABookDTO book)
         {
             bool ans = false;
             try
             {
                 HttpClient client = new HttpClient();
                 var data = JsonConvert.SerializeObject(book);
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, $"{_api.MainUrl}/api/v1/Books/{id}");
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, $"{_api.MainUrl}/api/v1/Books/{book.Id}");
                 request.Content = new StringContent(data, Encoding.UTF8, "application/json");
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
