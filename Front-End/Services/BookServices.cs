@@ -7,11 +7,9 @@ namespace Front_End.Services
 {
     public class BookServices : IBookServices
     {
-        private readonly IBookServices _bookServices;
         private readonly DataConnection _api;
         public BookServices()
         {
-            _bookServices = new BookServices();
             _api = new DataConnection();
         }
 
@@ -32,7 +30,7 @@ namespace Front_End.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return books = null;
+                Console.WriteLine(ex.Message); ;
             }
             return books;
         }

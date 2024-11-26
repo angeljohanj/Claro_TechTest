@@ -10,10 +10,10 @@ namespace Front_End.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IBookServices _bookServices;
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BookServices bookServices)
         {
             _logger = logger;
-            _bookServices = new BookServices();
+            _bookServices = bookServices;
         }
 
         public async Task<IActionResult> Index()
