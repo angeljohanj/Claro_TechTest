@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Claro_TechTest.Interfaces;
+using Claro_TechTest.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Claro_TechTest.Controllers
 {
@@ -6,18 +8,28 @@ namespace Claro_TechTest.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        private readonly IBookService _bookService;
+        public BookController()
+        {
+            _bookService = new BookService();
+        }
         [HttpGet("/api/Books")]
-        public JsonResult ListBooks()
+        public async Task<JsonResult> List()
         {
             try
             {
+                var books = await _bookService.ListAllBooks();
 
+                if (ModelState.IsValid)
+                {
+                    return new JsonResult(books);
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return default(JsonResult);
+            return new JsonResult(null);
         }
     }
 }
